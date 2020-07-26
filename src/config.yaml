@@ -13,9 +13,9 @@ spec:  # describes the state
       labels:
         app: web
     spec:
-      containers:  # run one container with nginx's Docker Hub image 1.16.1 
+      containers:
       - name: reach-site
-        image: nginx:1.16.1
+        image: tiangolo/uvicorn-gunicorn:python3.8
         ports:
           - containerPort: 80
 ---
