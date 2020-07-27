@@ -10,23 +10,15 @@ from pydantic import BaseModel, Field
 import constants, tasks
 from models import BasicPerson, Person
 
-
-if os.path.isfile('./test.db'):
-    os.remove('./test.db')
+# clean test.db on [re]start for testing purposes
+# if os.path.isfile('./test.db'):
+#    os.remove('./test.db')
 
 DATABASE_URL = "sqlite:///./test.db"
 
 database = databases.Database(DATABASE_URL)
 
 metadata = sqlalchemy.MetaData()
-
-notes = sqlalchemy.Table(
-    "notes",
-    metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("text", sqlalchemy.String),
-    sqlalchemy.Column("completed", sqlalchemy.Boolean),
-)
 
 persons = sqlalchemy.Table('persons', metadata,
     sqlalchemy.Column('id', sqlalchemy.Integer, primary_key=True, index=True),
@@ -45,7 +37,6 @@ app = FastAPI()
 @app.on_event("startup")
 async def startup():
     await database.connect()
-    await database.execute(persons.insert().values(first_name='John', last_name='Lewis', email='john@lewis.com'))
 
 @app.on_event("shutdown")
 async def shutdown():

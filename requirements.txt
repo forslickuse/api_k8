@@ -1,0 +1,4 @@
+databases
+sqlalchemy
+fastapi
+pydantic

@@ -1,7 +1,10 @@
-FROM tiangolo/uvicorn-gunicorn:python3.8
-
-LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
-
-RUN pip install --no-cache-dir fastapi
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
 COPY ./app /app
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+CMD ["uwsgi", "main:app"]
