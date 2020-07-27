@@ -2,8 +2,8 @@
 This project is a simple API built using FastAPI to register and obtain basic information about users.
 
 # API:
-1. GET: /person/<id>
-    - Returns `{id: <id>, email: <person_email}`
+1. GET: /person/{id}
+    - Returns `{id: <id>, email: <person_email>}`
 2. POST: /person/
     - Creates a Person (or user account)
     - Creates and sends a fake e-mail with first and last name in subject
@@ -16,8 +16,7 @@ This project is a simple API built using FastAPI to register and obtain basic in
         'id': <newly_created_id>
     }
     ```
-
-2. PUT: /person/<id>
+3. PUT: /person/{id}
     - Updates a Person's data
     - Returns
     ```
